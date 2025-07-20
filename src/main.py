@@ -38,8 +38,8 @@ def post_documents():
     post_documents_response = requests.post(
         url=uri.geturl(),
         headers=headers,
-        data=body
-    )
+        data=body, 
+    timeout=60)
     post_documents_response.raise_for_status()
     return post_documents_response.json()
 
@@ -51,7 +51,7 @@ def put_document(presigned_url):
     if args.with_s3_kms:
         headers['x-amz-server-side-encryption'] = 'aws:kms'
 
-    put_document_response = requests.put(presigned_url, data=body, headers=headers)
+    put_document_response = requests.put(presigned_url, data=body, headers=headers, timeout=60)
     put_document_response.raise_for_status()
     return put_document_response.content.decode()
 
@@ -63,8 +63,8 @@ def post_predictions(document_id, model_name):
     post_predictions_response = requests.post(
         url=uri.geturl(),
         headers=headers,
-        data=body
-    )
+        data=body, 
+    timeout=60)
     post_predictions_response.raise_for_status()
     return post_predictions_response.json()
 
